@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webcomps.js</title>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+    <script async>
+      function handleLoad(e) {
+        console.log('Loaded import: ' + e.target.href);
+      }
+      function handleError(e) {
+        console.log('Error loading import: ' + e.target.href);
+      }
+    </script>
+    <link rel="import" href="demo-comp.html"
+          onload="handleLoad(event)" 
+          onerror="handleError(event)">
+    
+</head>
+<body>
+    <!-- "unresolved" prevents flash of unstyled content (FOUC) -->
+    <demo-comp somevar="123" unresolved>component content</demo-comp>
+
+
+
+</body>
+</html>
