@@ -20,9 +20,12 @@
 </head>
 <body>
     <!-- "unresolved" prevents flash of unstyled content (FOUC) -->
-    <demo-comp somevar="123" unresolved>component content</demo-comp>
+    <demo-comp somevar="123" oncstm="alert('asdf')" unresolved>component content</demo-comp>
 
-
-
+    <script type="text/javascript">
+        document.querySelector('demo-comp').addEventListener('oncstm', function (e) {
+            console.log('from demo-comp: ', e.detail);
+        });
+    </script>
 </body>
 </html>

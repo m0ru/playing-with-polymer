@@ -1,8 +1,10 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
+
 <polymer-element 
   name="demo-comp"
   attributes="somevar">
     <template>
+    <div id='container'>
         <style type="text/css">
             :host {
                 border: 1px dashed black;
@@ -13,13 +15,39 @@
         <p><content></content></p>
         <p>somevar: {{somevar}} </p>
         <!--<content select="img"></content>-->
+        <input id='eventsource' 
+            type="text" 
+            on-keyup="{{publishChange}}"/>
 
         <!-- cstm-content will go here -->
+    </div>
     </template>
     <script>
         Polymer({
-            somevar: 42
+            somevar: 42,
+            ready: function() {
+                var es = this.$.container.querySelector('#eventsource');
+                console.log(es);
+                /*es.addEventListener('onkeyup', function (evt) {
+                    console.log('keyup ', evt.keyCode);
+                }, false);*/
+            },
+            publishChange: function (evt) {
+                console.log('keyup ', evt.keyCode);
+
+                var es = this.$.container.querySelector('#eventsource');
+                var e = new CustomEvent('oncstm', {'detail': es.value});
+                es.dispatchEvent(e); 
+            }
         });
+
+        /*var es = document.querySelector('demo-comp') //.querySelector('#eventsource');
+        console.log(JSON.stringify(es));
+        es.addEventListener('onkeyup', function (eKeyUp) {
+            var e = new CustomEvent('oncstm', {'detail': es.value});
+            es.dispatchEvent(e); 
+        }, false);*/
+
     </script>
 </polymer-element>
 
